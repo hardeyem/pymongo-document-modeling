@@ -1,6 +1,6 @@
 import datetime
-import documents as doc
-from errors import DeveloperFault
+import pymongo_document.documents as doc
+from .errors import DeveloperFault
 
 
 class RunningNumberPolicy(object):

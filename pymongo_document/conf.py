@@ -1,7 +1,7 @@
 import os
 import configparser
 import pymongo
-from errors import DeveloperFault
+from .errors import DeveloperFault
 
 
 # default config - will be override by settings module
