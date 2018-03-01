@@ -16,7 +16,8 @@ class Configuration(object):
 
 
 def update_config(config_path):
-
+    print(config_path)
+    print(os.path.join(config_path, 'pymongo-connectors.ini'))
     if os.path.isfile(config_path):
         path = config_path
     elif os.path.isdir(config_path):
@@ -24,6 +25,7 @@ def update_config(config_path):
     else:
         raise DeveloperFault('Unknown config_path=%s' % config_path)
 
+    path = os.path.abspath(path)
     if os.path.isfile(path):
         config = configparser.ConfigParser()
         config.read(path)
@@ -37,7 +39,7 @@ def update_config(config_path):
         if 'default' not in config:
             raise DeveloperFault('Bad configuration: "default" connection is required.')
 
-        map(validate_configuration, filter(lambda o: o[0] != 'DEFAULT', config.iteritems()))
+        map(validate_configuration, filter(lambda o: o[0] != 'DEFAULT', config.items()))
 
         Configuration.CONF = config
 

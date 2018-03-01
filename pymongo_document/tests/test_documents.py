@@ -1,3 +1,5 @@
+import os
+
 from .. import errors as err, conf, documents as doc
 import pymongo
 import unittest
@@ -27,8 +29,10 @@ class HolderOfSimpleDocuments(doc.Doc):
         collection_name = "document_holders"
 
 # Clean up
-SimpleDocument.manager.delete()
-
+try:
+    SimpleDocument.manager.delete()
+except:
+    print('Error cleaning up')
 
 class TestDocumentBasic(unittest.TestCase):
     """
@@ -535,6 +539,11 @@ class TestDocumentBasic(unittest.TestCase):
 
         self.assertRaises(err.DeveloperFault, lambda: conf.update_config('tests/unknown_config_file.ini'))
         self.assertRaises(err.DeveloperFault, lambda: conf.update_config('tests/conf/'))
+    print('i love you')
+    print(os.path.basename('tests'))
+    path = os.path.join('test', 'pymongo-connectors.ini')
+    print(path)
+    print(os.path.abspath(path))
 
 if __name__ == '__main__':
     unittest.main()
